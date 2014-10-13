@@ -13,22 +13,22 @@ Document Path:          /helloworld.wsgi
 Document Length:        16 bytes
 
 Concurrency Level:      1
-Time taken for tests:   0.784 seconds
-Complete requests:      1000
+Time taken for tests:   71.147 seconds
+Complete requests:      100000
 Failed requests:        0
-Total transferred:      205000 bytes
-HTML transferred:       16000 bytes
-Requests per second:    1275.41 [#/sec] (mean)
-Time per request:       0.784 [ms] (mean)
-Time per request:       0.784 [ms] (mean, across all concurrent requests)
-Transfer rate:          255.33 [Kbytes/sec] received
+Total transferred:      20500000 bytes
+HTML transferred:       1600000 bytes
+Requests per second:    1405.55 [#/sec] (mean)
+Time per request:       0.711 [ms] (mean)
+Time per request:       0.711 [ms] (mean, across all concurrent requests)
+Transfer rate:          281.38 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       0
-Processing:     0    1   0.3      1       5
-Waiting:        0    0   0.2      0       3
-Total:          0    1   0.3      1       5
+Connect:        0    0   0.0      0       1
+Processing:     0    1   0.1      1       4
+Waiting:        0    0   0.1      0       4
+Total:          0    1   0.1      1       5
 
 Percentage of the requests served within a certain time (ms)
   50%      1
@@ -38,5 +38,5 @@ Percentage of the requests served within a certain time (ms)
   90%      1
   95%      1
   98%      1
-  99%      2
+  99%      1
  100%      5 (longest request)

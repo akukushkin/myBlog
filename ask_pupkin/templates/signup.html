@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Signup/{% endblock %}
+
+{% block user %}
+<ul class="nav pull-right">
+    <li><a href="#">Log in</a></li>
+    <li><a href="#">Register</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Registration</legend>
+        <div class="control-group">
+            <label class="control-label" for="inputLogin">Login</label>
+            <div class="controls">
+               <input type="text" id="inputLogin">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Email</label>
+            <div class="controls">
+                <input type="text" id="inputEmail">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPasswor">Password</label>
+            <div class="controls">
+                <input type="password" id="inputPassword">
+            </div> 
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputNick">NickName</label>
+            <div class="controls">
+                <input type="text" id="inputNick">
+            </div> 
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputFile">Choose avatar</label>
+            <div class="controls">
+                <input class="input-file" id="inputFile" type="file">
+            </div> 
+        </div>
+        <div class="form-action">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary">Registrate</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

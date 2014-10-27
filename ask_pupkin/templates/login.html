@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Login/{% endblock %}
+
+{% block user %}
+<ul class="nav pull-right">
+    <li><a href="#">Log in</a></li>
+    <li><a href="#">Register</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<form class="form-horizontal">
+    <fieldset>
+        <legend><h3>Log In</h3></legend>
+        <div class="control-group">
+            <div class="alert">Sorry, wrong password!</div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputLogin">Login</label>
+            <div class="controls">
+                <input type="text" id="inputLogin" placeholder="Enter you login here">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPassword">Password</label>
+            <div class="controls">
+                <input type="password" id="inputPassword" placeholder="Password">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">Log in!</button>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <a href="#">Create new account</a>
+            </div>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

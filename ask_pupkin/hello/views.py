@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+
 def hello(request):
     response = "Hello, World!<br>\nMethod:"
     response = response + request.method + "<br>\n"
@@ -14,4 +15,13 @@ def hello(request):
         response = response + line
 
     return HttpResponse(response)
+
+#def index(request):
+#    return render(request, 'templates/index.html')
+
+#def signup(request):
+#    return render(request, 'templates/signup.html')
+
+#def login(request):
+#    return render(request, 'templates/login.html')
 # Create your views here.

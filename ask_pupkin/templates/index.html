@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Index/{% endblock %}
+
+{% block user %}
+<ul class="nav pull-right">
+    <li><a href="#">Log in</a></li>
+    <li><a href="#">Register</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">New</a></li>
+    <li><a href="#">Best</a></li>
+</ul>
+<div class="question row-fluid">
+    <div class="span2">
+        <img src="http://lorempixel.com/120/120/" class="img-rounded">
+        <a class="btn btn-small like" href="#"><i class="icon-heart"></i><span class="badge">3</span></a>
+    </div>
+    <div class="span6">
+        <h4><a href="#">How to ask questions?</a></h4>
+        <p>some text about this question</p>
+        <div>
+            <a href="#">answer <span class="badge">10</span></a>
+            Tags: <a href="#">lol</a> <a href="#">funny</a> <a href="#">unlikely</a>
+        </div>
+    </div>
+</div>
+<div class="question row-fluid">
+    <div class="span2">
+        <img src="http://lorempixel.com/120/120/" class="img-rounded">
+        <a class="btn btn-small like" href="#"><i class="icon-heart"></i><span class="badge">3</span></a>
+    </div>
+    <div class="span6">
+        <h4><a href="#">How to ask questions?</a></h4>
+        <p>some text about this question</p>
+        <div>
+            <a href="#">answer <span class="badge">10</span></a>
+            Tags: <a href="#">lol</a> <a href="#">funny</a> <a href="#">unlikely</a>
+        </div>
+    </div>
+</div>
+<div class="question row-fluid">
+    <div class="span2">
+        <img src="http://lorempixel.com/120/120/" class="img-rounded">
+        <a class="btn btn-small like" href="#"><i class="icon-heart"></i><span class="badge">3</span></a>
+    </div>
+    <div class="span6">
+        <h4><a href="#">How to ask questions?</a></h4>
+        <p>some text about this question</p>
+        <div>
+            <a href="#">answer <span class="badge">10</span></a>
+            Tags: <a href="#">lol</a> <a href="#">funny</a> <a href="#">unlikely</a>
+        </div>
+    </div>
+</div>
+<div class="pagination">
+    <ul>
+        <li class="disabled"><a href="#">Prev</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Next</a></li>
+    </ul>
+</div>
+{% endblock %}

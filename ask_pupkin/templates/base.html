@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}AskPupkin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" media="screen" type="text/css">
+    <style>
+        .question {
+            border: solid 1px lightgray;
+            margin-bottom: 30px;
+            padding: 20px 10px;
+        }
+        .like {
+            margin-top: 10px;
+        } 
+    </style>
+  </head>
+  <body>
+
+	<div class="navbar navbar-inverse navbar-static-top">
+ 		<div class="navbar-inner">
+    		<a class="brand" href="#">AskPupkin</a>
+			<form class="navbar-search">
+  				<input type="text" class="search-query" placeholder="Search">
+			</form>
+            <a href="#" class="btn offset6">Ask!</a>
+			{% block user %}{% endblock %}
+  		</div>
+	</div>    
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span8">
+				{% block content %}{% endblock %}
+			</div>
+			<div class="span4">
+				<h3>Popular Tags</h3>
+					<a href="#">best</a>
+					<a href="#">Lucky</a>
+					<a href="#">lol</a>
+					<a href="#">Funny</a>
+				<h3>Best Members</h3>
+					<ul>
+						<li><a href="#">Lesha</a></li>
+                                                <li><a href="#">Saha</a></li>
+                                                <li><a href="#">Dasha</a></li>
+                                                <li><a href="#">Pashqa</a></li>
+                                                <li><a href="#">Natali</a></li>
+					</ul>
+			</div>
+		</div>
+	</div>
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+  </body>
+</html>

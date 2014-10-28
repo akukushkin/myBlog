@@ -2,10 +2,22 @@
 
 {% block title %}Index/{% endblock %}
 
-{% block user %}
+{% comment %}{% block user %}
 <ul class="nav pull-right">
     <li><a href="#">Log in</a></li>
     <li><a href="#">Register</a></li>
+</ul>
+{% endblock %}{% endcomment %}
+
+{% block user %}
+<ul class="nav pull-right">
+    <div class="span1">
+        <img src="http://lorempixel.com/40/40/" class="img-round">
+    </div>
+    <div class="span2">
+        Nickname<br>
+        <a href="#">Settings</a> <a href="#">Log out</a>
+    </div>
 </ul>
 {% endblock %}
 

@@ -18,14 +18,17 @@
   </head>
   <body>
 
-	<div class="navbar navbar-inverse navbar-static-top">
+	<div class="navbar">
  		<div class="navbar-inner">
     		<a class="brand" href="#">AskPupkin</a>
-			<form class="navbar-search">
-  				<input type="text" class="search-query" placeholder="Search">
+			<form class="navbar-search form-search">
+                <div class="input-append">
+  				    <input type="text" class="search-query" placeholder="Search">
+                    <button type="submit" class="btn">Find!</button>
+                </div>
 			</form>
-            <a href="#" class="btn offset6">Ask!</a>
-			{% block user %}{% endblock %}
+            {% block user %}{% endblock %}
+            <a href="#" class="btn pull-right">Ask!</a>
   		</div>
 	</div>    
 	<div class="container-fluid">

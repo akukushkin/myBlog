@@ -1,35 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}Index/{% endblock %}
-
-{% comment %}{% block user %}
-<ul class="nav pull-right">
-    <li><a href="#">Log in</a></li>
-    <li><a href="#">Register</a></li>
-</ul>
-{% endblock %}{% endcomment %}
-
-{% block user %}
-<ul class="nav pull-right">
-    <div class="span1">
-        <img src="http://lorempixel.com/40/40/" class="img-round">
-    </div>
-    <div class="span2">
-        Nickname<br>
-        <a href="#">Settings</a> <a href="#">Log out</a>
-    </div>
-</ul>
-{% endblock %}
+{% block title %}Index{% endblock %}
 
 {% block content %}
 <ul class="nav nav-tabs">
     <li class="active"><a href="#">New</a></li>
     <li><a href="#">Best</a></li>
 </ul>
+
+{% for i in '123' %}
 <div class="question row-fluid">
-    <div class="span2">
+    <div class="span2 imglike">
         <img src="http://lorempixel.com/120/120/" class="img-rounded">
-        <a class="btn btn-small like" href="#"><i class="icon-heart"></i><span class="badge">3</span></a>
+        <div class="btn-group like pull-left">
+            <button class="btn btn-small">-</button>
+            <button class="btn btn-small" disabled>7</button>
+            <button class="btn btn-small">+</button>
+        </div>
     </div>
     <div class="span6">
         <h4><a href="#">How to ask questions?</a></h4>
@@ -40,34 +27,8 @@
         </div>
     </div>
 </div>
-<div class="question row-fluid">
-    <div class="span2">
-        <img src="http://lorempixel.com/120/120/" class="img-rounded">
-        <a class="btn btn-small like" href="#"><i class="icon-heart"></i><span class="badge">3</span></a>
-    </div>
-    <div class="span6">
-        <h4><a href="#">How to ask questions?</a></h4>
-        <p>some text about this question</p>
-        <div>
-            <a href="#">answer <span class="badge">10</span></a>
-            Tags: <a href="#">lol</a> <a href="#">funny</a> <a href="#">unlikely</a>
-        </div>
-    </div>
-</div>
-<div class="question row-fluid">
-    <div class="span2">
-        <img src="http://lorempixel.com/120/120/" class="img-rounded">
-        <a class="btn btn-small like" href="#"><i class="icon-heart"></i><span class="badge">3</span></a>
-    </div>
-    <div class="span6">
-        <h4><a href="#">How to ask questions?</a></h4>
-        <p>some text about this question</p>
-        <div>
-            <a href="#">answer <span class="badge">10</span></a>
-            Tags: <a href="#">lol</a> <a href="#">funny</a> <a href="#">unlikely</a>
-        </div>
-    </div>
-</div>
+{% endfor %}
+
 <div class="pagination">
     <ul>
         <li class="disabled"><a href="#">Prev</a></li>

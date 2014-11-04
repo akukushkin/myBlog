@@ -35,14 +35,15 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-#    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
     'main',
+    'ask',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -59,8 +60,10 @@ WSGI_APPLICATION = 'ask_pupkin.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'askdb',
+        'USER': 'askuser',
+        'PASSWORD': 'usr',
     }
 }
 
@@ -84,11 +87,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    "home/alex/Work/WEB/ask_pupkin/static",
+    os.path.join(BASE_DIR, 'static'),
 )
 
-STATIC_ROOT = '/home/alex/Work/WEB/ask_pupkin/static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 TEMPLATE_DIRS = (
-    "/home/alex/Work/WEB/ask_pupkin/templates", 
+    os.path.join(BASE_DIR, 'templates'), 
 )

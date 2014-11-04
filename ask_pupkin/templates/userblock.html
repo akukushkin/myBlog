@@ -1,0 +1,16 @@
+{% if not logged_in %}
+    <ul class="nav pull-right">
+        <li><a href="#">Log in</a></li>
+        <li><a href="#">Register</a></li>
+    </ul>
+{% else %}
+    <ul class="nav pull-right">
+        <div class="span1">
+            <img src="http://lorempixel.com/40/40/" class="img-rounded">
+        </div>
+        <div class="span2">
+            Nickname<br>
+            <a href="#">Settings</a> <a href="#">Log out</a>
+        </div>
+    </ul>       
+{% endif %}

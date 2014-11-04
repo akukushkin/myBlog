@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block title %}{% endblock %}AskPupkin</title>
+    <title>{% block title %}{% endblock %}/AskPupkin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="../static/css/bootstrap.css" rel="stylesheet" media="screen" type="text/css">
+    <link href="/css/bootstrap.css" rel="stylesheet" media="screen" type="text/css">
     <style>
         .question {
             border: solid 1px lightgray;
             margin-bottom: 30px;
-            padding: 20px 10px;
+            padding-bottom: 10px;
         }
         .like {
             margin-top: 10px;
-        } 
+        }
+        .imglike {
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+        .warning {
+            margin: 0 0;
+            margin-top: 5px;
+        }
     </style>
   </head>
   <body>
@@ -27,7 +35,7 @@
                     <button type="submit" class="btn">Find!</button>
                 </div>
 			</form>
-            {% block user %}{% endblock %}
+            {% include "userblock.html" %}
             <a href="#" class="btn pull-right">Ask!</a>
   		</div>
 	</div>    
@@ -36,7 +44,7 @@
 			<div class="span8">
 				{% block content %}{% endblock %}
 			</div>
-			<div class="span4">
+			<div class="span3 offset1">
 				<h3>Popular Tags</h3>
 					<a href="#">best</a>
 					<a href="#">Lucky</a>
@@ -45,16 +53,16 @@
 				<h3>Best Members</h3>
 					<ul>
 						<li><a href="#">Lesha</a></li>
-                                                <li><a href="#">Saha</a></li>
-                                                <li><a href="#">Dasha</a></li>
-                                                <li><a href="#">Pashqa</a></li>
-                                                <li><a href="#">Natali</a></li>
+                        <li><a href="#">Saha</a></li>
+                        <li><a href="#">Dasha</a></li>
+                        <li><a href="#">Pashqa</a></li>
+                        <li><a href="#">Natali</a></li>
 					</ul>
 			</div>
 		</div>
 	</div>
 
     <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="../static/js/bootstrap.js"></script>
+    <script src="/js/bootstrap.js"></script>
   </body>
 </html>

@@ -1,18 +1,16 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <title>{% block title %}{% endblock %}/AskPupkin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="/css/bootstrap.css" rel="stylesheet" media="screen" type="text/css">
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet" media="screen" type="text/css">
     <style>
         .question {
             border: solid 1px lightgray;
             margin-bottom: 30px;
             padding-bottom: 10px;
-        }
-        .like {
-            margin-top: 10px;
         }
         .imglike {
             padding-top: 10px;
@@ -28,7 +26,7 @@
 
 	<div class="navbar">
  		<div class="navbar-inner">
-    		<a class="brand" href="#">AskPupkin</a>
+    		<a class="brand" href="/">AskPupkin</a>
 			<form class="navbar-search form-search">
                 <div class="input-append">
   				    <input type="text" class="search-query" placeholder="Search">
@@ -63,6 +61,6 @@
 	</div>
 
     <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
+    <script src="{% static "js/bootstrap.js" %}"></script>
   </body>
 </html>

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Answer{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li><h3><a href="">{{ question.title }}</a></h3></li>
+</ul>
+<div class="question row-fluid">
+    <div class="span3 imglike">
+        <img src="http://lorempixel.com/180/180/" class="img-rounded">
+        <div>
+            <p class="text-center"><a href="#">{{ question.author.user.username }}</a></p>
+        </div>
+        <div class="btn-group pull-left offset3">
+            <button class="btn btn-small">-</button>
+            <button class="btn btn-small" disabled>{{ question.author.rating }}</button>
+            <button class="btn btn-small">+</button>
+        </div>
+    </div>
+    <div class="span8">
+        <h4><a href="answer/?id_q={{ question.id }}">{{ question.title }}</a></h4>
+        <p>{{ question.text }}</p>
+        <div>
+            Tags: {% for tag in question.tags.all %}
+                    <a href="#">{{ tag.word }}</a>
+                {% endfor %}
+            <div class="row-fluid">
+                <p class="muted text-right">{{ question.date_added.ctime }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="nav nav-tabs">
+    <li><h3>Answers</h3></li>
+</ul>
+
+{% for answer in answers %}
+<div class="question row-fluid">
+    <div class="span3 imglike">
+        <img src="http://lorempixel.com/180/180/" class="img-rounded">
+        <div>
+            <p class="text-center"><a href="#">{{ answer.author.user.username }}</a></p>
+        </div>
+        <div class="btn-group pull-left offset3">
+            <button class="btn btn-small">-</button>
+            <button class="btn btn-small" disabled>{{ answer.author.rating }}</button>
+            <button class="btn btn-small">+</button>
+        </div>
+    </div>
+    <div class="span8">
+        <br><p>{{ answer.text }}</p>
+        <div class="row-fluid">
+            <p class="muted text-right">{{ question.date_added.ctime }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="pagination">
+    <ul>
+        {% if answers.has_previous %}
+        <li><a href="?id_q={{ question.id }}&page={{ answers.previous_page_number }}">Prev</a></li>
+        {% else %} 
+        <li class="disabled"><a href="#">Prev</a></li>
+        {% endif %}
+        {% if answers.has_next %}
+        <li><a href="?id_q={{ question.id }}&page={{ answers.next_page_number }}">Next</a></li>
+        {% else %}
+        <li class="disabled"><a href="#">Next</a></li>
+        {% endif %}         
+    </ul>
+</div>
+{% endblock %}

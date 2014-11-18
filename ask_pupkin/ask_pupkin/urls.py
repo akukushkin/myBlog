@@ -9,7 +9,15 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'main.views.index'),
-    url(r'^signup/$', 'main.views.signup'),
-    url(r'^login/$', 'main.views.login'),
+    url(r'^$', 'ask.views.index'),
+    url(r'^signup/$', 'ask.views.signup'),
+    url(r'^login/$', 'ask.views.login'),
+    url(r'^answer/$', 'ask.views.answer'),
+    url(r'^index/best/$', 'ask.views.index', {'sort': 'best'}),
 )
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )

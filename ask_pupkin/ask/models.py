@@ -8,12 +8,15 @@ class Profile(models.Model):
     rating = models.IntegerField(default=0)
     avatar_url = models.CharField(max_length=60)
 
+class Tag(models.Model):
+    word = models.CharField(max_length=20)
 
 class Question(models.Model):
     author = models.ForeignKey(Profile)
     title = models.CharField(max_length=60)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
+    tags = models.ManyToManyField(Tag)
 
 
 class Answer(models.Model):
@@ -21,13 +24,4 @@ class Answer(models.Model):
     question = models.ForeignKey(Question)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
-    is_right = models.BooleanField(default=False)
-
-
-class Tag(models.Model):
-    word = models.CharField(max_length=20)
-
-
-class TagToAnswer(models.Model):
-   tag = models.ForeignKey(Tag)
-   question = models.ForeignKey(Question) 
+    is_right = models.BooleanField(default=False) 

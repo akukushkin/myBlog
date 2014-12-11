@@ -21,6 +21,7 @@ SECRET_KEY = '^y^f2z@_g4nv_rp!1@*@_v^_7ls5=)fk#4kn85$-$6cm(#tado'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -41,7 +42,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -57,7 +58,7 @@ WSGI_APPLICATION = 'ask_pupkin.wsgi.application'
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
-DEBUG_TOOLBAR_PANELS = [
+DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.versions.VersionsPanel',
     'debug_toolbar.panels.timer.TimerPanel',
     'debug_toolbar.panels.settings.SettingsPanel',
@@ -70,7 +71,7 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.signals.SignalsPanel',
     'debug_toolbar.panels.logging.LoggingPanel',
     'debug_toolbar.panels.redirects.RedirectsPanel',
-]
+)
 
 CONFIG_DEFAULTS = {
     # Toolbar options
@@ -110,12 +111,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/uploads/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'), 

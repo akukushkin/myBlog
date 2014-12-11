@@ -1,8 +1,71 @@
-from django.shortcuts import render_to_response
-from models import Question, Tag, Answer
+from django.shortcuts import render_to_response, render, HttpResponseRedirect
+from django.template import RequestContext
+from models import Question, Tag, Answer, Profile
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django import forms
+from django.db import models
 
 # Create your views here.
+
+class UserForm(forms.Form):
+    username = forms.CharField(max_length=30)
+    email = forms.EmailField(max_length=60)    
+    password = forms.CharField(widget=forms.PasswordInput())
+    avatar = forms.ImageField()
+     
+    def clean_username(self):
+        data = self.cleaned_data.get('username')
+        try:
+            User.objects.get(username=data)
+        except (User.DoesNotExist):
+           return data
+        raise forms.ValidationError('This username is already taken. ')             
+    
+    def clean_email(self):
+        data = self.cleaned_data.get('email')
+        try:
+            User.objects.get(email=data)
+        except (User.DoesNotExist):
+            return data
+        raise forms.ValidationError('This email is already taken. ')             
+
+class QuestionForm(forms.ModelForm):
+   
+    def __init__(self, *args, **kwargs):
+        self.author = kwargs.pop('author', None)
+        super(QuestionForm, self).__init__(*args, **kwargs)
+    
+    def save(self, commit=True):
+        instance = super(QuestionForm, self).save(commit=False)
+        instance.author = self.author
+        if commit:
+            instance.save()
+        return instance    
+
+    class Meta:
+        model = Question
+        fields = ['title', 'text']
+
+class AnswerForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        self.author = kwargs.pop('author', None)
+        self.question = kwargs.pop('question', None)
+        super(AnswerForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super(AnswerForm, self).save(commit=False)
+        instance.author = self.author
+        if commit:
+            instance.save()
+        return instance
+
+    class Meta:
+        model = Answer
+        fields = ['text']
+
 def index(request, sort='new'):
     page = request.GET.get('page')
     order = sort == 'best' and '-author__rating' or '-date_added'
@@ -18,13 +81,25 @@ def index(request, sort='new'):
         questions = paginator.page(paginator.num_pages)
     
     isBest = sort == 'best' and True or False 
-    return render_to_response('index.html', {'logged_in': True, 'questions': questions, 'isBest': isBest})
+    return render_to_response('index.html', {'questions': questions, 'isBest': isBest}, context_instance=RequestContext(request))
 
 def signup(request):
-    return render_to_response('signup.html', {'logged_in': False})
-
-def login(request):
-    return render_to_response('login.html', {'logged_in': False})
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            avatar = form.cleaned_data['avatar']
+            user = User.objects.create_user(username, email, password)
+            Profile.objects.create(user_id=user.id, avatar_url=avatar)
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect('/')
+    else:
+        form = UserForm()
+    
+    return render(request, 'signup.html', {'form': form})
 
 def answer(request):
     id_q = request.GET.get('id_q')
@@ -38,5 +113,33 @@ def answer(request):
         answers = paginator.page(1)
     except EmptyPage:
         answers = paginator.page(paginator.num_pages)
-    question = Question.objects.get(id=id_q) 
-    return render_to_response('answer.html', {'logged_in': False, 'answers': answers, 'question': question})
+    question = Question.objects.get(id=id_q)
+    
+    form = answer_the_question(request, question) 
+
+    return render_to_response('answer.html', {'answers': answers, 'question': question, 'form': form}, context_instance=RequestContext(request))
+
+def ask(request):
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            author = request.user.profile
+            form = QuestionForm(request.POST, author=author)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/') 
+        else:
+            form = QuestionForm()
+        return render(request, 'ask.html', {'form': form})
+    else:
+        return HttpResponseRedirect('/login/')
+
+def answer_the_question(request, question):
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            author = request.user.profile
+            form = AnswerForm(request.POST, author=author, question=question)
+            if form.is_valid():
+                form.save()
+        else:
+            form = AnswerForm()
+        return form

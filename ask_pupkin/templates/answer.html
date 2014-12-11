@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="span8">
-        <h4><a href="answer/?id_q={{ question.id }}">{{ question.title }}</a></h4>
+        <h4><a href="">{{ question.title }}</a></h4>
         <p>{{ question.text }}</p>
         <div>
             Tags: {% for tag in question.tags.all %}
@@ -71,4 +71,20 @@
         {% endif %}         
     </ul>
 </div>
+
+{% if form %}
+    <form class="form-horizontal" method="post" action="">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Your answer</legend>
+            <div class="control-group">{{ form.text }}</div>
+            <div class="form-action">
+                <div class="control-group">
+                    <button type="submit" class="btn btn-primary">Answer</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+{% endif %}
+
 {% endblock %}

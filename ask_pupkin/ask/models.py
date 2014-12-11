@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User)
     rating = models.IntegerField(default=0)
-    avatar_url = models.CharField(max_length=60)
+    avatar_url = models.ImageField(upload_to='users/', height_field=180, width_field=180)
 
 class Tag(models.Model):
     word = models.CharField(max_length=20)
@@ -17,7 +17,6 @@ class Question(models.Model):
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag)
-
 
 class Answer(models.Model):
     author = models.ForeignKey(Profile)

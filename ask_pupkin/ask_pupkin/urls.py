@@ -11,9 +11,11 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'ask.views.index'),
     url(r'^signup/$', 'ask.views.signup'),
-    url(r'^login/$', 'ask.views.login'),
+    url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     url(r'^answer/$', 'ask.views.answer'),
     url(r'^index/best/$', 'ask.views.index', {'sort': 'best'}),
+    url(r'^ask/$', 'ask.views.ask'),
 )
 
 if settings.DEBUG:

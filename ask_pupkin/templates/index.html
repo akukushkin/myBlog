@@ -28,10 +28,10 @@
         </div>
     </div>
     <div class="span8">
-        <h4><a href="answer/?id_q={{ question.id }}">{{ question.title }}</a></h4>
+        <h4><a href="../../answer/?id_q={{ question.id }}">{{ question.title }}</a></h4>
         <p>{{ question.text }}</p>
         <div>
-            <a href="answer/?id_q={{ question.id }}">answer <span class="badge">{{ question.answer_set.count }}</span></a>
+            <a href="../../answer/?id_q={{ question.id }}">answer <span class="badge">{{ question.answer_set.count }}</span></a>
             Tags: {% for tag in question.tags.all %}
                     <a href="#">{{ tag.word }}</a>
                 {% endfor %}

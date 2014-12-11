@@ -1,16 +1,16 @@
-{% if not logged_in %}
-    <ul class="nav pull-right">
-        <li><a href="login/">Log in</a></li>
-        <li><a href="signup/">Register</a></li>
-    </ul>
+{% if user.is_authenticated %}
+<ul class="nav pull-right">
+    <div class="span1">
+        <img src="" class="img-rounded">
+    </div>
+    <div class="span2">
+        {{ user.username }}<br>
+        <a href="#">Settings</a> <a href="../../logout/">Log out</a>
+    </div>
+</ul>  
 {% else %}
-    <ul class="nav pull-right">
-        <div class="span1">
-            <img src="http://lorempixel.com/40/40/" class="img-rounded">
-        </div>
-        <div class="span2">
-            Nickname<br>
-            <a href="#">Settings</a> <a href="#">Log out</a>
-        </div>
-    </ul>       
+<ul class="nav pull-right">
+    <li><a href="../../login/">Log in</a></li>
+    <li><a href="../../signup/">Register</a></li>
+</ul>
 {% endif %}

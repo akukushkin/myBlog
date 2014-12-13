@@ -48,24 +48,6 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = ['title', 'text']
 
-class AnswerForm(forms.ModelForm):
-    
-    def __init__(self, *args, **kwargs):
-        self.author = kwargs.pop('author', None)
-        self.question = kwargs.pop('question', None)
-        super(AnswerForm, self).__init__(*args, **kwargs)
-
-    def save(self, commit=True):
-        instance = super(AnswerForm, self).save(commit=False)
-        instance.author = self.author
-        if commit:
-            instance.save()
-        return instance
-
-    class Meta:
-        model = Answer
-        fields = ['text']
-
 def index(request, sort='new'):
     page = request.GET.get('page')
     order = sort == 'best' and '-author__rating' or '-date_added'
@@ -90,9 +72,8 @@ def signup(request):
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            avatar = form.cleaned_data['avatar']
             user = User.objects.create_user(username, email, password)
-            Profile.objects.create(user_id=user.id, avatar_url=avatar)
+            Profile.objects.create(user_id=user.id, avatar_url=request.FILES['avatar'])
             user = authenticate(username=username, password=password)
             login(request, user)
             return HttpResponseRedirect('/')
@@ -103,6 +84,15 @@ def signup(request):
 
 def answer(request):
     id_q = request.GET.get('id_q')
+    question = Question.objects.get(id=id_q)
+    
+    if request.method == 'POST':
+        if request.user.is_authenticated():
+            author = request.user.profile
+            Answer.objects.create(author=author, question=question, text=request.POST['text'])
+        else:
+            return HttpResponseRedirect('/login/')
+    
     answer_list = Answer.objects.filter(question_id=id_q)
     paginator = Paginator(answer_list, 3)
 
@@ -113,11 +103,8 @@ def answer(request):
         answers = paginator.page(1)
     except EmptyPage:
         answers = paginator.page(paginator.num_pages)
-    question = Question.objects.get(id=id_q)
     
-    form = answer_the_question(request, question) 
-
-    return render_to_response('answer.html', {'answers': answers, 'question': question, 'form': form}, context_instance=RequestContext(request))
+    return render_to_response('answer.html', {'answers': answers, 'question': question}, context_instance=RequestContext(request))
 
 def ask(request):
     if request.user.is_authenticated():
@@ -132,14 +119,3 @@ def ask(request):
         return render(request, 'ask.html', {'form': form})
     else:
         return HttpResponseRedirect('/login/')
-
-def answer_the_question(request, question):
-    if request.user.is_authenticated():
-        if request.method == 'POST':
-            author = request.user.profile
-            form = AnswerForm(request.POST, author=author, question=question)
-            if form.is_valid():
-                form.save()
-        else:
-            form = AnswerForm()
-        return form

@@ -114,19 +114,10 @@ def ask(request):
             form = QuestionForm(request.POST, author=author)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('/') 
+                redirect_to = request.GET.get('next')
+                return HttpResponseRedirect(redirect_to)
         else:
             form = QuestionForm()
         return render(request, 'ask.html', {'form': form})
     else:
         return HttpResponseRedirect('/login/')
-
-def settings(request):
-    if request.method == 'POST':
-        form = UserForm(request.POST, request.FILES)
-        if form.is_valid():
-            request.user.username = form.cleaned_data['username']
-            request.user.profile.email = form.cleaned_data['email']
-            user = User.objects.create_user(username, email, password)
-            Profile.objects.create(user_id=user.id, avatar_url=request.FILES['avatar'])
-            user = authenticate(username=username, password=password) 

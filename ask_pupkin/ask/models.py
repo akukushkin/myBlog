@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User)
     rating = models.IntegerField(default=0)
-    avatar_url = models.ImageField(upload_to='users/', height_field=180, width_field=180)
+    avatar_url = models.ImageField(upload_to='users')
 
 class Tag(models.Model):
     word = models.CharField(max_length=20)

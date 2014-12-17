@@ -5,12 +5,12 @@
     </div>
     <div class="span2">
         {{ user.username }}<br>
-        <a href="#">Settings</a> <a href="../../logout/">Log out</a>
+        <a href="#">Settings</a> <a href="{% url 'django.contrib.auth.views.logout' %}?next={{ request.path }}">Log out</a>
     </div>
 </ul>  
 {% else %}
 <ul class="nav pull-right">
-    <li><a href="../../login/">Log in</a></li>
-    <li><a href="../../signup/">Register</a></li>
+    <li><a href="{% url 'django.contrib.auth.views.login' %}?next={{ request.path }}">Log in</a></li>
+    <li><a href="{% url 'ask.views.signup' %}?next={{ request.path }}">Register</a></li>
 </ul>
 {% endif %}

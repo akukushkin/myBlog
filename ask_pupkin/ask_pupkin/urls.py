@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^answer/$', 'asking.views.answer'),
     url(r'^index/best/$', 'asking.views.index', {'sort': 'best'}),
     url(r'^ask/$', 'asking.views.ask'),
+    url(r'^like/$', 'asking.views.like'),
 )
 
 if settings.DEBUG:

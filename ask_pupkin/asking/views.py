@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django import forms
 from django.db import models
+import json
 
 # Create your views here.
 
@@ -89,7 +90,7 @@ def answer(request):
     
     if request.method == 'POST':
         if request.user.is_authenticated():
-            author = request.user.profile
+            author = request.user
             Answer.objects.create(author=author, question=question, text=request.POST['text'])
         else:
             return HttpResponseRedirect('/login/')
@@ -130,4 +131,23 @@ def settings(request):
             request.user.profile.email = form.cleaned_data['email']
             user = User.objects.create_user(username, email, password)
             Profile.objects.create(user_id=user.id, avatar_url=request.FILES['avatar'])
-            user = authenticate(username=username, password=password) 
+            user = authenticate(username=username, password=password)
+
+def like(response):
+    response_data = {}
+    if request.user.is_authenticated():
+        type = request.POST.get('type')
+        id_user = request.POST.get('id')
+        user = User.objects.get(id=id_user)
+        if type == 'like':
+            user.profile.rating = 10
+            response_data['status'] = 'ok'
+            response_data['new_rating'] = user.profile.rating 
+        else:
+            user.profile.raing = 13
+            response_data['status'] = 'ok'
+            response_data['new_rating'] = user.profile.rating
+    else:
+        response_data['status'] = 'error'
+        responce_data['new_rating'] = 0;
+    return HttpResponse(json.dumps(response_data), content_type="application/json")

@@ -16,7 +16,7 @@ class Question(models.Model):
     tags = TagField()
 
 class Answer(models.Model):
-    author = models.ForeignKey(Profile)
+    author = models.ForeignKey(User)
     question = models.ForeignKey(Question)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)

@@ -17,14 +17,14 @@
 {% for question in questions %}
 <div class="question row-fluid">
     <div class="span3 imglike">
-        <img src="http://lorempixel.com/180/180/" class="img-rounded">
+        <img src="{{ question.author.profile.avatar_url.url }}" class="img-rounded">
         <div>
             <p class="text-center"><a href="#">{{ question.author.username }}</a></p>
         </div>
         <div class="btn-group pull-left offset3">
-            <button class="btn btn-small">-</button>
-            <button class="btn btn-small" disabled>{{ question.author.profile.rating }}</button>
-            <button class="btn btn-small">+</button>
+            <button class="btn btn-small js_dislike" data-id="{{ question.author.id }}">-</button>
+            <button class="btn btn-small js_cnt" disabled>{{ question.author.profile.rating }}</button>
+            <button class="btn btn-small js_like" data-id="{{ question.author.id }}">+</button>
         </div>
     </div>
     <div class="span8">

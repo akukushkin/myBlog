@@ -8,7 +8,7 @@
 </ul>
 <div class="question row-fluid">
     <div class="span3 imglike">
-        <img src="http://lorempixel.com/180/180/" class="img-rounded">
+        <img src="{{ question.author.profile.avatar_url.url }}" class="img-rounded">
         <div>
             <p class="text-center"><a href="#">{{ question.author.username }}</a></p>
         </div>
@@ -36,7 +36,7 @@
 {% for answer in answers %}
 <div class="question row-fluid">
     <div class="span3 imglike">
-        <img src="http://lorempixel.com/180/180/" class="img-rounded">
+        <img src="{{ answer.author.profile.avatar_url.url }}" class="img-rounded">
         <div>
             <p class="text-center"><a href="#">{{ answer.author.username }}</a></p>
         </div>
@@ -49,7 +49,7 @@
     <div class="span8">
         <br><p>{{ answer.text }}</p>
         <div class="row-fluid">
-            <p class="muted text-right">{{ question.date_added.ctime }}</p>
+            <p class="muted text-right">{{ answer.date_added.ctime }}</p>
         </div>
     </div>
 </div>

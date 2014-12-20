@@ -8,12 +8,12 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('asking', '0001_initial'),
+        ('asking', '0002_auto_20141220_1557'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='question',
+            model_name='answer',
             name='author',
             field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
         ),

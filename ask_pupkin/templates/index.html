@@ -19,11 +19,11 @@
     <div class="span3 imglike">
         <img src="http://lorempixel.com/180/180/" class="img-rounded">
         <div>
-            <p class="text-center"><a href="#">{{ question.author.user.username }}</a></p>
+            <p class="text-center"><a href="#">{{ question.author.username }}</a></p>
         </div>
         <div class="btn-group pull-left offset3">
             <button class="btn btn-small">-</button>
-            <button class="btn btn-small" disabled>{{ question.author.rating }}</button>
+            <button class="btn btn-small" disabled>{{ question.author.profile.rating }}</button>
             <button class="btn btn-small">+</button>
         </div>
     </div>
@@ -32,9 +32,7 @@
         <p>{{ question.text }}</p>
         <div>
             <a href="../../answer/?id_q={{ question.id }}">answer <span class="badge">{{ question.answer_set.count }}</span></a>
-            Tags: {% for tag in question.tags.all %}
-                    <a href="#">{{ tag.word }}</a>
-                {% endfor %}
+            Tags: <a href="">{{ question.tags }}</a>
             <div class="row-fluid">
                 <p class="muted text-right">{{ question.date_added.ctime }}</p>
             </div>
@@ -47,7 +45,7 @@
     <ul>
         {% if questions.has_previous %}
             <li><a href="?page={{ questions.previous_page_number }}">Prev</a></li>
-        {% else %} 
+         {% else %} 
             <li class="disabled"><a href="#">Prev</a></li>
         {% endif %}
         {% if questions.has_next %}

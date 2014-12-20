@@ -38,7 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar.apps.DebugToolbarConfig',
-    'ask',
+#    'ask',
+    'asking',
+    'tagging',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -97,8 +99,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'askdb',
-        'USER': 'askuser',
-        'PASSWORD': 'usr',
+        'USER': 'alex',
+        'PASSWORD': 'alex',
     }
 }
 

@@ -2,18 +2,19 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ask', '0007_auto_20141208_0744'),
+        ('asking', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='avatar_url',
-            field=models.ImageField(height_field=180, width_field=180, upload_to=b'users/'),
+            model_name='question',
+            name='author',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
         ),
     ]

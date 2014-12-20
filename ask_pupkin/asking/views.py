@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, render, HttpResponseRedirect
 from django.template import RequestContext
-from models import Question, Tag, Answer, Profile
+from models import Question, Answer, Profile
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -46,11 +46,11 @@ class QuestionForm(forms.ModelForm):
 
     class Meta:
         model = Question
-        fields = ['title', 'text']
+        fields = ['title', 'text', 'tags']
 
 def index(request, sort='new'):
     page = request.GET.get('page')
-    order = sort == 'best' and '-author__rating' or '-date_added'
+    order = sort == 'best' and '-author__profile__rating' or '-date_added'
     question_list = Question.objects.order_by(order)
 
     paginator = Paginator(question_list, 3)
@@ -104,17 +104,18 @@ def answer(request):
         answers = paginator.page(1)
     except EmptyPage:
         answers = paginator.page(paginator.num_pages)
-    
+     
     return render_to_response('answer.html', {'answers': answers, 'question': question}, context_instance=RequestContext(request))
 
 def ask(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
-            author = request.user.profile
+            author = request.user
             form = QuestionForm(request.POST, author=author)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('/') 
+                redirect_to = request.GET.get('next')
+                return HttpResponseRedirect(redirect_to) 
         else:
             form = QuestionForm()
         return render(request, 'ask.html', {'form': form})

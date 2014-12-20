@@ -9,13 +9,13 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'ask.views.index'),
-    url(r'^signup/$', 'ask.views.signup'),
+    url(r'^$', 'asking.views.index'),
+    url(r'^signup/$', 'asking.views.signup'),
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
-    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
-    url(r'^answer/$', 'ask.views.answer'),
-    url(r'^index/best/$', 'ask.views.index', {'sort': 'best'}),
-    url(r'^ask/$', 'ask.views.ask'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout'),
+    url(r'^answer/$', 'asking.views.answer'),
+    url(r'^index/best/$', 'asking.views.index', {'sort': 'best'}),
+    url(r'^ask/$', 'asking.views.ask'),
 )
 
 if settings.DEBUG:

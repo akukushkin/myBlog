@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from tagging.fields import TagField
 # Create your models here.
 
 class Profile(models.Model):
@@ -8,15 +8,12 @@ class Profile(models.Model):
     rating = models.IntegerField(default=0)
     avatar_url = models.ImageField(upload_to='users')
 
-class Tag(models.Model):
-    word = models.CharField(max_length=20)
-
 class Question(models.Model):
-    author = models.ForeignKey(Profile)
+    author = models.ForeignKey(User)
     title = models.CharField(max_length=60)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
-    tags = models.ManyToManyField(Tag)
+    tags = TagField()
 
 class Answer(models.Model):
     author = models.ForeignKey(Profile)

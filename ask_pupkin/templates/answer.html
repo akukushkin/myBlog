@@ -10,11 +10,11 @@
     <div class="span3 imglike">
         <img src="http://lorempixel.com/180/180/" class="img-rounded">
         <div>
-            <p class="text-center"><a href="#">{{ question.author.user.username }}</a></p>
+            <p class="text-center"><a href="#">{{ question.author.username }}</a></p>
         </div>
         <div class="btn-group pull-left offset3">
             <button class="btn btn-small">-</button>
-            <button class="btn btn-small" disabled>{{ question.author.rating }}</button>
+            <button class="btn btn-small" disabled>{{ question.author.profile.rating }}</button>
             <button class="btn btn-small">+</button>
         </div>
     </div>
@@ -22,9 +22,7 @@
         <h4><a href="">{{ question.title }}</a></h4>
         <p>{{ question.text }}</p>
         <div>
-            Tags: {% for tag in question.tags.all %}
-                    <a href="#">{{ tag.word }}</a>
-                {% endfor %}
+            Tags: <a href="#">{{ question.tags }}</a>
             <div class="row-fluid">
                 <p class="muted text-right">{{ question.date_added.ctime }}</p>
             </div>
@@ -40,11 +38,11 @@
     <div class="span3 imglike">
         <img src="http://lorempixel.com/180/180/" class="img-rounded">
         <div>
-            <p class="text-center"><a href="#">{{ answer.author.user.username }}</a></p>
+            <p class="text-center"><a href="#">{{ answer.author.username }}</a></p>
         </div>
         <div class="btn-group pull-left offset3">
             <button class="btn btn-small">-</button>
-            <button class="btn btn-small" disabled>{{ answer.author.rating }}</button>
+            <button class="btn btn-small" disabled>{{ answer.author.profile.rating }}</button>
             <button class="btn btn-small">+</button>
         </div>
     </div>

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 from django.conf import settings
+import tagging.fields
 
 
 class Migration(migrations.Migration):
@@ -29,7 +30,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('rating', models.IntegerField(default=0)),
-                ('avatar_url', models.CharField(max_length=60)),
+                ('avatar_url', models.ImageField(upload_to=b'users')),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -43,7 +44,8 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=60)),
                 ('text', models.TextField()),
                 ('date_added', models.DateTimeField(auto_now_add=True)),
-                ('author', models.ForeignKey(to='ask.Profile')),
+                ('tags', tagging.fields.TagField(max_length=255, blank=True)),
+                ('author', models.ForeignKey(to='asking.Profile')),
             ],
             options={
             },
@@ -52,13 +54,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='answer',
             name='author',
-            field=models.ForeignKey(to='ask.Profile'),
+            field=models.ForeignKey(to='asking.Profile'),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='answer',
             name='question',
-            field=models.ForeignKey(to='ask.Question'),
+            field=models.ForeignKey(to='asking.Question'),
             preserve_default=True,
         ),
     ]
